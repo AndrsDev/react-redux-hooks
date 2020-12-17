@@ -1,52 +1,41 @@
 import { User } from 'models/user';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { connect } from 'react-redux';
+import * as usersActions from 'actions/users.actions';
 
 
-function  useUsers(initialState: User[] = []) {
-  const [ users, setUsers ] = useState<User[]>(initialState);
-  const fetchUsers = async () => {
-    const response = await fetch('https://jsonplaceholder.typicode.com/users/')
-    const data = await response.json();
-    setUsers(data);
-  }
-
-  return {
-    users,
-    fetchUsers,
-  }
-}
-
-
-function App() {
-
-  const { users, fetchUsers } = useUsers();
+function Users({ users, getAll, ...props}: any) {
 
   useEffect(() => {
-    fetchUsers();
+    getAll();
   }, [])
 
   return (
-    <div className="margin">
-      <table className="table">
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Correo</th>
-            <th>Enlace</th>
+    <table className="table">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Correo</th>
+          <th>Enlace</th>
+        </tr>
+      </thead>
+      <tbody>
+        {users.map((user: User, index: number) =>     
+          <tr key={index}>
+            <td>{user.name}</td>
+            <td>{user.email}</td>
+            <td>{user.website}</td>
           </tr>
-        </thead>
-        <tbody>
-          {users.map((user, index) =>     
-            <tr key={index}>
-              <td>{user.name}</td>
-              <td>{user.email}</td>
-              <td>{user.website}</td>
-            </tr>
-          )}
-        </tbody>
-      </table>
-    </div>
+        )}
+      </tbody>
+    </table>
   );
 }
 
-export default App;
+const mapStateToProps = (state: any) => {
+  return {
+    users: state.userReducer.users
+  }
+}
+
+export default connect(mapStateToProps, usersActions)(Users);
