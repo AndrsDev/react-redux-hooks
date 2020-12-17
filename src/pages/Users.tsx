@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'stores';
 import { getAll } from 'stores/users/actions';
 
-
 function Users() {
   const users: User[] = useSelector((state: RootState) => state.user.items);
   const dispatch = useDispatch();
