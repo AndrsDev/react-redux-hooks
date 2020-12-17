@@ -6,12 +6,12 @@ import App from './App';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import reducers  from 'stores';
-import reduxThunk from 'redux-thunk';
+import thunk from 'redux-thunk';
 
 const store = createStore(
   reducers, //Reducers,
   {}, // Initial State,
-  applyMiddleware(reduxThunk)
+  applyMiddleware(thunk)
 )
 
 ReactDOM.render(

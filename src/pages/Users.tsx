@@ -1,14 +1,16 @@
 import { User } from 'models/user';
 import { useEffect } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'stores';
 import { getAll } from 'stores/users/actions';
 
 
-function Users({ users, getAll, ...props}: any) {
+function Users() {
+  const users: User[] = useSelector((state: RootState) => state.user.items);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    getAll();
+    dispatch(getAll());
   }, [])
 
   return (
@@ -33,15 +35,19 @@ function Users({ users, getAll, ...props}: any) {
   );
 }
 
-const mapStateToProps = (state: RootState) => {
-  return {
-    users: state.user.items
-  }
-}
 
-const mapDispatchToProps = { getAll }
+export default Users;
 
-export default connect(
-  mapStateToProps, 
-  mapDispatchToProps
-)(Users);
+// the "connect" way to listen to state updates -----------------
+// const mapStateToProps = (state: RootState) => {
+//   return {
+//     users: state.user.items
+//   }
+// }
+
+// const mapDispatchToProps = { getAll }
+
+// export default connect(
+//   mapStateToProps, 
+//   mapDispatchToProps
+// )(Users);
