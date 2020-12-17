@@ -1,7 +1,7 @@
 import { User } from 'models/user';
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
-import * as usersActions from 'actions/users.actions';
+import { getAll } from 'actions/users.actions';
 
 
 function Users({ users, getAll, ...props}: any) {
@@ -38,4 +38,9 @@ const mapStateToProps = (state: any) => {
   }
 }
 
-export default connect(mapStateToProps, usersActions)(Users);
+const mapDispatchToProps = { getAll }
+
+export default connect(
+  mapStateToProps, 
+  mapDispatchToProps
+)(Users);
