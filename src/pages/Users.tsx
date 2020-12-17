@@ -1,7 +1,8 @@
 import { User } from 'models/user';
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { getAll } from 'actions/users.actions';
+import { RootState } from 'stores';
+import { getAll } from 'stores/users/actions';
 
 
 function Users({ users, getAll, ...props}: any) {
@@ -32,9 +33,9 @@ function Users({ users, getAll, ...props}: any) {
   );
 }
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: RootState) => {
   return {
-    users: state.userReducer.users
+    users: state.user.items
   }
 }
 
