@@ -11,7 +11,8 @@ function Users() {
 
   useEffect(() => {
     dispatch(getAll());
-  }, [])
+  }, [dispatch])
+
 
   return (
     <table className="table">
