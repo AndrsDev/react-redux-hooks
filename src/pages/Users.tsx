@@ -27,24 +27,27 @@ function Users() {
   }
 
   return (
-    <table className="table">
-      <thead>
-        <tr>
-          <th>Nombre</th>
-          <th>Correo</th>
-          <th>Enlace</th>
-        </tr>
-      </thead>
-      <tbody>
-        {items.map((user: User, index: number) =>     
-          <tr key={index}>
-            <td>{user.name}</td>
-            <td>{user.email}</td>
-            <td>{user.website}</td>
+    <>
+      <h1>Users</h1>
+      <table className="table">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Enlace</th>
           </tr>
-        )}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {items.map((user: User, index: number) =>     
+            <tr key={index}>
+              <td>{user.name}</td>
+              <td>{user.email}</td>
+              <td>{user.website}</td>
+            </tr>
+          )}
+        </tbody>
+      </table>
+    </>
   );
 }
 
