@@ -5,14 +5,18 @@ import { RootState } from 'stores';
 import { getAll } from 'stores/users/actions';
 import { UsersState } from 'stores/users/types';
 import Loader from 'components/Loader';
+import { Link } from 'react-router-dom';
+
 
 function Users() {
   const { items, loading, error }: UsersState = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAll());
-  }, [dispatch])
+    if(!items || items.length === 0){
+      dispatch(getAll());
+    }
+  }, [])
 
   if(loading){
     return (
@@ -32,9 +36,10 @@ function Users() {
       <table className="table">
         <thead>
           <tr>
-            <th>Nombre</th>
-            <th>Correo</th>
-            <th>Enlace</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Website</th>
+            <th>Posts</th>
           </tr>
         </thead>
         <tbody>
@@ -43,6 +48,11 @@ function Users() {
               <td>{user.name}</td>
               <td>{user.email}</td>
               <td>{user.website}</td>
+              <td>
+                <Link className="center-vertical" to={`/posts/${index}`} >
+                  <div className="eye-solid icon"></div>
+                </Link>
+              </td>
             </tr>
           )}
         </tbody>
