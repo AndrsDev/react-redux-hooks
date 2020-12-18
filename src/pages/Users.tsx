@@ -3,15 +3,28 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'stores';
 import { getAll } from 'stores/users/actions';
+import { UsersState } from 'stores/users/types';
+import Loader from 'components/Loader';
 
 function Users() {
-  const users: User[] = useSelector((state: RootState) => state.user.items);
+  const { items, loading, error }: UsersState = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getAll());
   }, [dispatch])
 
+  if(loading){
+    return (
+      <div className="center">
+        <Loader />;
+      </div>
+    )
+  }
+  
+  if(error){
+    return <div>{error}</div>
+  }
 
   return (
     <table className="table">
@@ -23,7 +36,7 @@ function Users() {
         </tr>
       </thead>
       <tbody>
-        {users.map((user: User, index: number) =>     
+        {items.map((user: User, index: number) =>     
           <tr key={index}>
             <td>{user.name}</td>
             <td>{user.email}</td>
@@ -37,6 +50,8 @@ function Users() {
 
 
 export default Users;
+
+
 
 // the "connect" way to listen to state updates -----------------
 // const mapStateToProps = (state: RootState) => {
