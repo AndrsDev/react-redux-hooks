@@ -23,7 +23,7 @@ function Users() {
   }
   
   if(error){
-    return <div>{error}</div>
+    return <h2>{error}</h2>
   }
 
   return (

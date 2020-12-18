@@ -21,7 +21,6 @@ export const getAll = () => async (dispatch: (action: UsersActionTypes) => void)
     })
 
   } catch (e) {
-    console.error(e);
     dispatch({
       type: ERROR,
       payload: e.message,
