@@ -2,13 +2,13 @@
 import {
   ERROR,
   LOADING,
-  SET,
   PostsActionTypes,
   PostsState,
+  ADD,
 } from './types';
 
 const initialState : PostsState = {
-  items: [],
+  items: new Map(),
   loading: false,
   error: '',
 };
@@ -16,14 +16,21 @@ const initialState : PostsState = {
 function postReducer(state: PostsState = initialState, action: PostsActionTypes) : PostsState {
   switch (action.type) {
 
-    case SET: 
+    case ADD: {
+      const items = new Map(state.items)
+      items.set(
+        action.payload.id, 
+        action.payload.posts
+      )
+
+      console.log(items);
       return {
         ...state, 
-        items: action.payload,
+        items: items,
         loading: false,
         error: '',
       }
-
+    }
     case LOADING: 
       return {
         ...state,

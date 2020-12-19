@@ -20,7 +20,7 @@ function userReducer(state: UsersState = initialState, action: UsersActionTypes)
 
     case SET: {
       const users = action.payload;
-      const map = users.reduce((list: Map<number, number>, user, index) => {
+      const map = users.reduce((list: Map<any, number>, user, index) => {
         list.set(user.id, index)
         return list
       }, new Map())

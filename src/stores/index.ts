@@ -9,7 +9,7 @@ const rootReducer = combineReducers({
   posts: postReducer, 
 })
 
-const composeEnhancers = composeWithDevTools({});
+const composeEnhancers = composeWithDevTools({serialize: true});
 
 const store = createStore(
   rootReducer, //Reducers,

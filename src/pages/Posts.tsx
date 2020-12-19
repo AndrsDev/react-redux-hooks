@@ -16,10 +16,13 @@ function Posts(props: any) {
   const uid = parseInt(props.match.params.uid);
 
   useEffect(() => {
-    if(!users || users.length === 0){
+    if(!users.length){
       dispatch(getAllUsers());
     }
-    dispatch(getPostsByUserId(uid));
+
+    if(!postsState.items.has(uid)){
+      dispatch(getPostsByUserId(uid));
+    }
   }, [])
 
   return (
