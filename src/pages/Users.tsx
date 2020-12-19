@@ -2,7 +2,7 @@ import { User } from 'models/user';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'stores';
-import { getAll } from 'stores/users/actions';
+import { getAllUsers } from 'stores/users/actions';
 import { UsersState } from 'stores/users/types';
 import Loader from 'components/Loader';
 import { Link } from 'react-router-dom';
@@ -14,7 +14,7 @@ function Users() {
 
   useEffect(() => {
     if(!items || items.length === 0){
-      dispatch(getAll());
+      dispatch(getAllUsers());
     }
   }, [])
 
@@ -49,7 +49,7 @@ function Users() {
               <td>{user.email}</td>
               <td>{user.website}</td>
               <td>
-                <Link className="center-vertical" to={`/posts/${index}`} >
+                <Link className="center-vertical" to={`/posts/${user.id}`} >
                   <div className="eye-solid icon"></div>
                 </Link>
               </td>

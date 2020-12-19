@@ -2,11 +2,11 @@ import { User } from 'models/user';
 import {
   ERROR,
   LOADING,
-  SET_USERS,
+  SET,
   UsersActionTypes,
 } from './types';
 
-export const getAll = () => async (dispatch: (action: UsersActionTypes) => void) => {
+export const getAllUsers = () => async (dispatch: (action: UsersActionTypes) => void) => {
   dispatch({
     type: LOADING,
   })
@@ -16,7 +16,7 @@ export const getAll = () => async (dispatch: (action: UsersActionTypes) => void)
 
     const users: User[] = await response.json();
     dispatch({
-      type: SET_USERS,
+      type: SET,
       payload: users
     })
 

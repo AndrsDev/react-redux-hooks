@@ -2,13 +2,14 @@
 import {
   ERROR,
   LOADING,
-  SET_USERS,
+  SET,
   UsersActionTypes,
   UsersState,
 } from './types';
 
 const initialState : UsersState = {
   items: [],
+  itemsIndexById: new Map(),
   loading: false,
   error: '',
 };
@@ -16,13 +17,22 @@ const initialState : UsersState = {
 function userReducer(state: UsersState = initialState, action: UsersActionTypes) : UsersState {
   switch (action.type) {
 
-    case SET_USERS: 
+
+    case SET: {
+      const users = action.payload;
+      const map = users.reduce((list: Map<number, number>, user, index) => {
+        list.set(user.id, index)
+        return list
+      }, new Map())
+      
       return {
         ...state, 
-        items: action.payload,
+        items: users,
+        itemsIndexById: map,
         loading: false,
         error: '',
       }
+    }
 
     case LOADING: 
       return {

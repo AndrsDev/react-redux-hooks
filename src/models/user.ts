@@ -1,7 +1,7 @@
 //Generated with https://app.quicktype.io/
 
 export interface User {
-  id?: number;
+  id: number;
   name?: string;
   username?: string;
   email?: string;

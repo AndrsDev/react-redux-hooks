@@ -1,19 +1,21 @@
 import { User } from "models/user";
 
+
 // STATE type
 export interface UsersState {
   items: User[],
+  itemsIndexById: Map<any, number>,
   loading: boolean,
   error: string,
 }
 
-// Action types
-export const SET_USERS = 'SET_USERS';
-export const LOADING = 'LOADING';
-export const ERROR = 'ERROR';
+// Action type values MUST BE UNIQUE among all other reducers;
+export const SET = 'SET_USERS';
+export const LOADING = 'LOADING_USERS';
+export const ERROR = 'ERROR_USERS';
 
-interface SetUsersAction {
-  type: typeof SET_USERS,
+interface SetAction {
+  type: typeof SET,
   payload: User[]
 }
 
@@ -26,4 +28,4 @@ interface ErrorAction {
   payload: string,
 }
 
-export type UsersActionTypes = SetUsersAction | LoadingAction | ErrorAction;
+export type UsersActionTypes = SetAction | LoadingAction | ErrorAction;
