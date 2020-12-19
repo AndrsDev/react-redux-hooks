@@ -22,8 +22,7 @@ function postReducer(state: PostsState = initialState, action: PostsActionTypes)
         action.payload.id, 
         action.payload.posts
       )
-
-      console.log(items);
+      
       return {
         ...state, 
         items: items,
