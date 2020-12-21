@@ -4,6 +4,8 @@ import { RootState } from "stores";
 import { PostsState } from "stores/posts/types";
 import { getAllUsers } from 'stores/users/actions';
 import { getPostsByUserId } from 'stores/posts/actions';
+import { Post } from "models/post";
+import Loader from 'components/Loader';
 
 function Posts(props: any) {
   const { items: users, ids: userIds } = useSelector((state: RootState) => ({ 
@@ -25,10 +27,30 @@ function Posts(props: any) {
     }
   }, [])
 
+
+  if(postsState.loading){
+    return (
+      <div className="center">
+        <Loader />;
+      </div>
+    )
+  }
+  
+  if(postsState.error){
+    return <h2>{postsState.error}</h2>
+  }
+
   return (
     <>
       <h1>Posts</h1>
       <p>{users[userIds.get(uid)!]?.name}</p>
+      {postsState.items.get(uid)?.map((post: Post, index: number) =>     
+        <article key={index} className='postContainer'>
+          <h3>{post.title}</h3>
+          <p>{post.body}</p>
+        </article>
+      )}
+
     </>
   );
 }
