@@ -5,17 +5,20 @@ import { PostsState } from "stores/posts/types";
 import { getAllUsers } from 'stores/users/actions';
 import { getPostsByUserId } from 'stores/posts/actions';
 import { Post } from "models/post";
+import { useParams } from "react-router-dom";
 import Loader from 'components/Loader';
 
 function Posts(props: any) {
+  
   const { items: users, ids: userIds } = useSelector((state: RootState) => ({ 
     items: state.user.items, 
     ids: state.user.itemsIndexById
   }));
-  const postsState: PostsState = useSelector((state: RootState) => state.posts);
 
+  const postsState: PostsState = useSelector((state: RootState) => state.posts);
   const dispatch = useDispatch();
-  const uid = parseInt(props.match.params.uid);
+  const params = useParams<any>();
+  const uid = parseInt(params.uid);
 
   useEffect(() => {
     if(!users.length){
